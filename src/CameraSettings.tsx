@@ -10,12 +10,12 @@ export const CameraSettings = () => {
         if (status?.granted) {
             const setup = async () => {
 
-                const sizes = await cameraRef.current.getAvailablePictureSizesAsync("4:3");
+                const sizes = await cameraRef.current.getAvailablePictureSizesAsync();
                 console.log("cameraSizes", sizes);
             }
             setup();
         }
-    }, [status])
+    }, [status?.granted])
 
     return (
         <React.Fragment>
@@ -29,7 +29,7 @@ export const CameraSettings = () => {
 
 const styles = StyleSheet.create({
     camera: {
-        height: 0,
-        width: 0
+        height: 100,
+        width: 100
     }
 })
