@@ -6,16 +6,16 @@ export const CameraSettings = () => {
     const cameraRef = useRef(null);
     const [status, requestPermission] = Camera.useCameraPermissions();
     useEffect(() => {
-        console.log(status)
-    }, [status])
-    useEffect(() => {
-        const setup = async () => {
+        console.log("status", status)
+        if (status?.granted) {
+            const setup = async () => {
 
-            const sizes = await cameraRef.current.getAvailablePictureSizesAsync("4:3");
-            console.log("cameraSizes", sizes);
+                const sizes = await cameraRef.current.getAvailablePictureSizesAsync("4:3");
+                console.log("cameraSizes", sizes);
+            }
+            setup();
         }
-        setup();
-    }, [cameraRef.current])
+    }, [status])
 
     return (
         <React.Fragment>
