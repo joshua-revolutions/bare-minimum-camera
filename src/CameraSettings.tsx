@@ -29,7 +29,7 @@ export const CameraSettings = () => {
 
 const styles = StyleSheet.create({
     camera: {
-        height: 100,
-        width: 100
+        height: 0,
+        width: 0
     }
 })

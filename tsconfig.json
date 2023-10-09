@@ -14,7 +14,6 @@
         "strictNullChecks": false,
         "target": "esnext",
         "noImplicitAny": false,
-        "baseUrl": ".",
     },
     "exclude": [
         "node_modules",
