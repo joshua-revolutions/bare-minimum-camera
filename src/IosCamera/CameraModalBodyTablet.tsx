@@ -26,9 +26,11 @@ export const CameraModalBodyTablet = (props: Props) => {
     const [isBusy, setIsBusy] = useState(false);
 
     useEffect(() => {
+        if (!hasPermission) {
+            requestPermission();
+        }
 
-
-    }, []);
+    }, [hasPermission]);
 
 
     const pickPhoto = async () => {
@@ -65,9 +67,10 @@ export const CameraModalBodyTablet = (props: Props) => {
     }
 
     const takePhoto = async () => {
-        console.log('takePhoto')
         const photo = await cameraRef.current.takePhoto()
         const path = photo.path;
+        console.log('takePhoto', path)
+
         const base64 = await imageUtil.toBase64Compressed(path);
         console.log(base64)
     }

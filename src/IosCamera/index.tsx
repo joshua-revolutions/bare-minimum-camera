@@ -1,6 +1,5 @@
-import { Camera } from 'expo-camera';
 import React, { useEffect, useState } from 'react';
-import { Text, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import { measurementConstants } from '../constants/measurementConstants';
 import { CameraModalBodyTablet } from './CameraModalBodyTablet';
 
@@ -16,20 +15,12 @@ interface Props {
 }
 
 export const IosCamera = (props: Props) => {
-    const [hasPermission, setHasPermission] = useState(null);
     const windowDimensions = useWindowDimensions();
     const [previewWidth, setPreviewWidth] = useState(null);
     const [previewHeight, setPreviewHeight] = useState(null);
     const [cameraLayout, setCameraLayout] = useState<CameraLayout>(CameraLayout.Unknown);
 
-    useEffect(() => {
-        (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync();
-            setHasPermission(status === 'granted');
-        })();
 
-
-    }, []);
 
     useEffect(() => {
         const previewHeight = windowDimensions.width * 4 / 3;
@@ -44,12 +35,6 @@ export const IosCamera = (props: Props) => {
         }
     }, [windowDimensions])
 
-    if (hasPermission === null) {
-        return <Text>No access to camera</Text>;
-    }
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-    }
     if (!previewHeight || !previewWidth) {
         return null;
     }
